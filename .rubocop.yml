@@ -2,24 +2,6 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   TargetRubyVersion: 4.0
-  Exclude:
-    - ".ruby-lsp/**/*"
 
 Layout/LineLength:
   Max: 100
-
-Metrics/AbcSize:
-  Exclude:
-    - "lib/tmux_cswitch.rb"
-
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/tmux_cswitch.rb"
-
-Metrics/MethodLength:
-  Exclude:
-    - "lib/tmux_cswitch.rb"
-
-Metrics/ModuleLength:
-  Exclude:
-    - "lib/tmux_cswitch.rb"

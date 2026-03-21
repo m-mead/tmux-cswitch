@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative 'lib/tmux_cswitch'
+require_relative '../lib/tmux_cswitch'
 
 TmuxCSwitch.run(argv: ARGV, program_name: $PROGRAM_NAME)

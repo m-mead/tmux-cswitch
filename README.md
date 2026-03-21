@@ -22,13 +22,10 @@
 
 ## Installation
 
-Clone the repository and put the script on your `PATH`.
-> Using the latest release is recommended.
-
 ```sh
-git clone --branch 0.1.0 https://github.com/m-mead/tmux-cswitch.git
+git clone https://github.com/m-mead/tmux-cswitch.git
 cd tmux-cswitch
-ln -s "$PWD/tmux-cswitch" ~/.local/bin/tmux-cswitch
+export PATH=$PATH:$PWD/bin
 ```
 
 ## Configuration
@@ -49,7 +46,7 @@ Each configured root in `paths` is resolved and expanded into its immediate chil
 Run:
 
 ```sh
-tmux-cswitch
+bin/tmux-cswitch
 ```
 
 Inside the picker:
