@@ -3,7 +3,7 @@
 [![lint](https://github.com/m-mead/tmux-cswitch/actions/workflows/lint.yml/badge.svg)](https://github.com/m-mead/tmux-cswitch/actions/workflows/lint.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/m-mead/tmux-cswitch/blob/main/LICENSE)
 
-`tmux-cswitch` is an opinionated `tmux` + `fzf` project switcher.
+`tmux-cswitch` is an opinionated `tmux` + `fzf` client switcher.
 
 <img width="1488" height="982" alt="image" src="https://github.com/user-attachments/assets/9588d929-5d0b-4aad-be69-47e9431455ae" />
 
