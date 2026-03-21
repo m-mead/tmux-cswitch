@@ -23,9 +23,10 @@
 ## Installation
 
 Clone the repository and put the script on your `PATH`.
+> Using the latest release is recommended.
 
 ```sh
-git clone https://github.com/m-mead/tmux-cswitch.git
+git clone --branch 0.1.0 https://github.com/m-mead/tmux-cswitch.git
 cd tmux-cswitch
 ln -s "$PWD/tmux-cswitch" ~/.local/bin/tmux-cswitch
 ```
