@@ -1,0 +1,17 @@
+name: lint
+on:
+  push:
+  pull_request:
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Run RuboCop
+        run: bundle exec rubocop tmux-cswitch

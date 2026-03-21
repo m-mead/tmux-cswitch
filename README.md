@@ -13,7 +13,7 @@
 
 ## Requirements
 
-- [ruby](https://www.ruby-lang.org)
+- [Ruby 4.x](https://www.ruby-lang.org)
 - [tmux](https://github.com/tmux/tmux)
 - [fzf](https://github.com/junegunn/fzf)
 

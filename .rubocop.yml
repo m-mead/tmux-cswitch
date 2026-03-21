@@ -1,0 +1,9 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 4.0
+  Exclude:
+    - ".ruby-lsp/**/*"
+
+Layout/LineLength:
+  Max: 100
