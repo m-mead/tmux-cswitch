@@ -2,6 +2,8 @@
 
 `tmux-cswitch` is an opinionated `tmux` + `fzf` project switcher.
 
+<img width="1488" height="982" alt="image" src="https://github.com/user-attachments/assets/9588d929-5d0b-4aad-be69-47e9431455ae" />
+
 ## Features
 
 - Configurable base paths
@@ -11,9 +13,9 @@
 
 ## Requirements
 
-- Ruby
-- `tmux`
-- `fzf`
+- [ruby](https://www.ruby-lang.org)
+- [tmux](https://github.com/tmux/tmux)
+- [fzf](https://github.com/junegunn/fzf)
 
 ## Installation
 
