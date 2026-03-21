@@ -16,7 +16,7 @@
 
 ## Requirements
 
-- [Ruby 4](https://www.ruby-lang.org)
+- [ruby 4](https://www.ruby-lang.org)
 - [tmux](https://github.com/tmux/tmux)
 - [fzf](https://github.com/junegunn/fzf)
 
@@ -69,8 +69,6 @@ The picker preview shows:
 - Project path
 - Generated session name
 - Current `tmux` windows for that session, when it exists
-
-The preview starts hidden and can be toggled with `tab`.
 
 ## Limitations
 
