@@ -4,20 +4,17 @@ module TmuxCSwitch
   # Owns the handoff between the project list, fzf, and tmux.
   class Picker
     RESET = "\e[0m"
-    GREEN = "\e[32m"
-    YELLOW = "\e[33m"
-    MARKER = '+'
     FIELD_DELIMITER = "\t"
     PREVIEW_FORMAT = %q(
       #{?window_active,>, } #{window_index}: #{window_name}#{window_flags}  #{window_panes} panes
     ).delete("\n").strip
 
-    def initialize(projects:, env:, stdout:)
+    def initialize(projects:, gui:, env:, stdout:)
       @projects = projects
       @env = env
       @stdout = stdout
       @tmux = Picker::Tmux.new(env: env)
-      @rows = Picker::Rows.new(projects: projects, tmux: @tmux)
+      @rows = Picker::Rows.new(projects: projects, gui: gui, tmux: @tmux)
     end
 
     def list_projects(include_hidden_path: false)
@@ -131,8 +128,20 @@ module TmuxCSwitch
 
     # Formats the rows that fzf renders.
     class Rows
-      def initialize(projects:, tmux:)
+      ANSI_COLORS = {
+        'black' => "\e[30m",
+        'red' => "\e[31m",
+        'green' => "\e[32m",
+        'yellow' => "\e[33m",
+        'blue' => "\e[34m",
+        'magenta' => "\e[35m",
+        'cyan' => "\e[36m",
+        'white' => "\e[37m"
+      }.freeze
+
+      def initialize(projects:, gui:, tmux:)
         @projects = projects
+        @gui = gui
         @tmux = tmux
       end
 
@@ -145,11 +154,23 @@ module TmuxCSwitch
       private
 
       def current_session_marker
-        @current_session_marker ||= colorize(Picker::MARKER, Picker::GREEN)
+        @current_session_marker ||= colorize(marker, current_session_color)
       end
 
       def session_marker_text
-        @session_marker_text ||= colorize(Picker::MARKER, Picker::YELLOW)
+        @session_marker_text ||= colorize(marker, session_color)
+      end
+
+      def marker
+        @gui.fetch('marker')
+      end
+
+      def current_session_color
+        ANSI_COLORS.fetch(@gui.fetch('current_session_color'))
+      end
+
+      def session_color
+        ANSI_COLORS.fetch(@gui.fetch('session_color'))
       end
 
       def colorize(text, color)

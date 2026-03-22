@@ -88,11 +88,15 @@ module TmuxCSwitch
     end
 
     def picker
-      @picker ||= Picker.new(projects: projects, env: @env, stdout: @stdout)
+      @picker ||= Picker.new(projects: projects, gui: config.gui, env: @env, stdout: @stdout)
     end
 
     def projects
-      @projects ||= Project.new
+      @projects ||= Project.new(config: config)
+    end
+
+    def config
+      @config ||= Project::Config.new(Project::CONFIG_PATH)
     end
 
     def script_path

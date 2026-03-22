@@ -8,9 +8,9 @@ module TmuxCSwitch
   class Project
     CONFIG_PATH = File.expand_path('~/.config/tmux-cswitch/config.yaml')
 
-    def initialize
+    def initialize(config:)
       @normalized_paths = {}
-      @config = Config.new(CONFIG_PATH)
+      @config = config
     end
 
     def paths
@@ -136,6 +136,10 @@ module TmuxCSwitch
         load.fetch('paths')
       end
 
+      def gui
+        load.fetch('gui')
+      end
+
       private
 
       def load
@@ -154,7 +158,7 @@ module TmuxCSwitch
           return empty_config
         end
 
-        { 'paths' => valid_paths(data['paths']) }
+        { 'paths' => valid_paths(data['paths']), 'gui' => valid_gui(data['gui']) }
       end
 
       def valid_paths(paths)
@@ -165,8 +169,50 @@ module TmuxCSwitch
         []
       end
 
+      def valid_gui(gui)
+        return default_gui if gui.nil?
+
+        unless gui.is_a?(Hash)
+          warn_invalid_config("'gui' must be a mapping")
+          return default_gui
+        end
+
+        default_gui.merge(
+          'marker' => valid_gui_string(gui, 'marker'),
+          'current_session_color' => valid_gui_color(gui, 'current_session_color'),
+          'session_color' => valid_gui_color(gui, 'session_color')
+        ).compact
+      end
+
+      def valid_gui_string(gui, key)
+        return unless gui.key?(key)
+        return gui[key] if gui[key].is_a?(String)
+
+        warn_invalid_config("'gui.#{key}' must be a string")
+        nil
+      end
+
+      def valid_gui_color(gui, key)
+        value = valid_gui_string(gui, key)
+        return if value.nil?
+        return value if Picker::Rows::ANSI_COLORS.key?(value)
+
+        warn_invalid_config(
+          "'gui.#{key}' must be one of: #{Picker::Rows::ANSI_COLORS.keys.join(', ')}"
+        )
+        nil
+      end
+
+      def default_gui
+        {
+          'marker' => '+',
+          'current_session_color' => 'green',
+          'session_color' => 'yellow'
+        }
+      end
+
       def empty_config
-        { 'paths' => [] }
+        { 'paths' => [], 'gui' => default_gui }
       end
 
       def warn_invalid_config(message)

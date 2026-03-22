@@ -37,6 +37,12 @@ export PATH=$PATH:$PWD/bin
 paths:
   - ~/projects
   - ~/notes
+
+# Colors are ANSI: black, red, green, yellow, blue, magenta, cyan, white
+gui:
+  marker: "+"
+  current_session_color: green
+  session_color: yellow
 ```
 
 Each configured root in `paths` is resolved and expanded into its immediate child directories; each child is treated as a selectable project.
