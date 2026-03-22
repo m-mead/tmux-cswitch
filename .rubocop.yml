@@ -4,4 +4,6 @@ AllCops:
   TargetRubyVersion: 3.1
 
 Layout/LineLength:
-  Max: 100
+  Max: 120
+Metrics/MethodLength:
+  Max: 40

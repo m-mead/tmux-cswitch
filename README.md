@@ -36,15 +36,14 @@ The default file location is `~/.config/tmux-cswitch/config.yaml` but can be ove
 
 **Sample**
 ```yaml
-paths:
+min_components: 2              # default: 1
+paths:                         # default: empty
   - ~/projects
   - ~/notes
-
-# Colors are ANSI: black, red, green, yellow, blue, magenta, cyan, white
-gui:
-  marker: "+"
-  current_session_color: green
-  session_color: yellow
+gui:                           # options: black, red, green, yellow, blue, magenta, cyan, white
+  marker: "+"                  # default: +
+  current_session_color: green # default: green
+  session_color: yellow        # default: yellow
 ```
 
 Each configured root in `paths` is resolved and expanded into its immediate child directories; each child is treated as a selectable project.
@@ -67,7 +66,11 @@ If a session already exists, `tmux-cswitch` switches to it; otherwise, it create
 ## Session Naming
 
 Session names are formed by using the last path component and optionally adding previous path components, joined with `__`, if there is a name collision.
-If the full path is exhausted and there is still a conflict, then a unique hash is appended.
+
+### Git worktree tips
+
+Set `min_components` to choose the minimum number of trailing path components to use when generating session names.
+For example, if `~/projects/foo` is a bare git worktree listed in `paths`, then the worktree `~/projects/foo/main` becomes `foo__main` when `min_components: 2`.
 
 ## Preview
 

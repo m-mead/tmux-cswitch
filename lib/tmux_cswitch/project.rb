@@ -58,7 +58,9 @@ module TmuxCSwitch
     end
 
     def unique_session_name(path, parts, normalized_parts)
-      1.upto(parts.length) do |count|
+      min_components = @config.min_components.clamp(1, parts.length)
+
+      min_components.upto(parts.length) do |count|
         candidate = session_name_slug(parts.last(count))
         next if candidate.empty?
         next if session_name_conflict?(path, candidate, count, normalized_parts)
@@ -141,6 +143,10 @@ module TmuxCSwitch
         load.fetch('gui')
       end
 
+      def min_components
+        load.fetch('min_components')
+      end
+
       private
 
       def load
@@ -159,7 +165,13 @@ module TmuxCSwitch
           return empty_config
         end
 
-        { 'paths' => valid_paths(data['paths']), 'gui' => valid_gui(data['gui']) }
+        {
+          'paths' => valid_paths(data['paths']),
+          'gui' => valid_gui(data['gui']),
+          'min_components' => valid_min_components(
+            data['min_components']
+          )
+        }
       end
 
       def valid_paths(paths)
@@ -183,6 +195,10 @@ module TmuxCSwitch
           'current_session_color' => valid_gui_color(gui, 'current_session_color'),
           'session_color' => valid_gui_color(gui, 'session_color')
         ).compact
+      end
+
+      def valid_min_components(min_components)
+        valid_session_path_components(min_components)
       end
 
       def valid_gui_string(gui, key)
@@ -213,7 +229,19 @@ module TmuxCSwitch
       end
 
       def empty_config
-        { 'paths' => [], 'gui' => default_gui }
+        {
+          'paths' => [],
+          'gui' => default_gui,
+          'min_components' => 1
+        }
+      end
+
+      def valid_session_path_components(value)
+        return 1 if value.nil?
+        return value if value.is_a?(Integer) && value >= 1
+
+        warn_invalid_config("'min_components' must be an integer >= 1")
+        1
       end
 
       def warn_invalid_config(message)
