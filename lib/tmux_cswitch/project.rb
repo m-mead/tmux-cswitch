@@ -6,7 +6,8 @@ require 'yaml'
 module TmuxCSwitch
   # Reads configured project roots and turns them into switchable entries.
   class Project
-    CONFIG_PATH = File.expand_path('~/.config/tmux-cswitch/config.yaml')
+    CONFIG_PATH = File.expand_path(ENV.fetch('TMUXCSWITCH_CONFIG',
+                                             '~/.config/tmux-cswitch/config.yaml'))
 
     def initialize(config:)
       @normalized_paths = {}

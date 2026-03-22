@@ -30,7 +30,8 @@ export PATH=$PATH:$PWD/bin
 
 ## Configuration
 
-`tmux-cswitch` reads its configuration from a file: `~/.config/tmux-cswitch/config.yaml`
+`tmux-cswitch` reads its configuration from a file.
+The default file location is `~/.config/tmux-cswitch/config.yaml` but can be overridden by setting `TMUXCSWITCH_CONFIG`.
 
 **Sample**
 ```yaml
