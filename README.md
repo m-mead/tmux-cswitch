@@ -1,6 +1,7 @@
 # tmux-cswitch
 
-[![lint](https://github.com/m-mead/tmux-cswitch/actions/workflows/lint.yml/badge.svg)](https://github.com/m-mead/tmux-cswitch/actions/workflows/lint.yml)
+[![CI](https://github.com/m-mead/tmux-cswitch/actions/workflows/lint.yml/badge.svg)](https://github.com/m-mead/tmux-cswitch/actions/workflows/lint.yml)
+[![Ruby 3.1+](https://img.shields.io/badge/Ruby-3.1%2B-CC342D.svg)](https://www.ruby-lang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/m-mead/tmux-cswitch/blob/main/LICENSE)
 
 `tmux-cswitch` is an opinionated `tmux` + `fzf` client switcher.
@@ -16,7 +17,7 @@
 
 ## Requirements
 
-- [ruby 4](https://www.ruby-lang.org)
+- [Ruby 3.1+](https://www.ruby-lang.org)
 - [tmux](https://github.com/tmux/tmux)
 - [fzf](https://github.com/junegunn/fzf)
 
